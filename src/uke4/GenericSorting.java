@@ -1,7 +1,9 @@
 package uke4;
 
+import java.util.Arrays;
+
 public class GenericSorting {
-    public static class Person implements Comparable<GenericsTest.Person>{
+    public static class Person implements Comparable<Person>{
         String fornavn;
         String etternavn;
 
@@ -10,7 +12,7 @@ public class GenericSorting {
             this.etternavn=etternavn;
         }
 
-        public int compareTo(GenericsTest.Person other){
+        public int compareTo(Person other) {
             /*
             if (this.etternavn<other.etternavn){
                 return -1;
@@ -22,22 +24,40 @@ public class GenericSorting {
                 return 1;
             }
              */
-            int last_compare=this.etternavn.compareTo(other.etternavn);
-            if (last_compare==0){
+            int last_compare = this.etternavn.compareTo(other.etternavn);
+            if (last_compare == 0) {
                 return this.fornavn.compareTo(other.fornavn);
-            }
-            else {
+            } else {
                 return last_compare;
             }
-
+        }
+        public String toString(){
+            return fornavn+" "+etternavn;
         }
     }
     static
     <T extends Comparable<? super T>>
-    int maks_generic(T[] values){
-        T current_max=values[0];
-        int current_indeks=0;
-        for(int i=1; i<values.length; ++i){
+    void sort(T[] values){
+        //looper over alle untatt siste element
+        for (int i=0; i<values.length-1; i++){
+            //finn største element i intervallet [i, a.lenght]
+             int max_index=maks(values,i,values.length);
+            //bytt største element til posisjon i
+            T temp=values[i];
+            values[i]=values[max_index];
+            values[max_index]=temp;
+
+            // fortsett
+
+        }
+    }
+
+    static
+    <T extends Comparable<? super T>>
+    int maks(T[] values, int begin, int end){
+        T current_max=values[begin];
+        int current_indeks=begin;
+        for(int i=begin+1; i<end; ++i){
             //if (values[i]>current_Maks){
             if (values[i].compareTo(current_max)>0)
                 current_max=values[i];
@@ -51,7 +71,16 @@ public class GenericSorting {
         Character[] b = {'A', 'C', 'K', 'L', 'Z', 'Y', 'M'};
         String [] c={"ASF","Kari", "poteter","lammelår","eple","Petter"};
 
-        GenericsTest.Person[] d = {new GenericsTest.Person("Petter", "Petterson"), new GenericsTest.Person("Kari", "Petterson"),
-                new GenericsTest.Person("Nils", "Abrahamsen")};
+        Person[] d = {new Person("Petter", "Petterson"),
+                new Person("Kari", "Petterson"),
+                new Person("Nils", "Abrahamsen"),
+                new Person("Tor","Toresen")};
+        int person_max_index=maks(d,0,d.length);
+        System.out.println("Siste person, leksikografisk, er "+d[person_max_index]);
+
+        System.out.println("Sorterer personer");
+        System.out.println("Før: "+Arrays.toString(d));
+        sort(d);
+        System.out.println("Etter: "+Arrays.toString(d));
     }
 }
