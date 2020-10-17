@@ -1,31 +1,27 @@
 package oblig;
 
 public class Oppgave3 {
-    public static int antallUlikeUsortert(int[] a) {
-        //throw new UnsupportedOperationException();
-        if (a.length < 2) {
+    public static int antallUlikeUsortert(int []a){
+        if (a.length>2){
             return a.length;
         }
-
-        int antall = 1;
-        for (int i = 1; i < a.length; i++) {
+        int antallUlikverdier=1;
+        for (int i=1; i<a.length; i++){
             int j=0;
             for (; j<i; j++){
                 int verdi=a[i];
-                if (a[j]==verdi) {
+                if (a[j]==verdi){
                     break;
                 }
             }
-            if (j==i) {
-                antall++;
+            if (j==i){
+                antallUlikverdier++;
             }
-            else{
+            else {
                 throw new UnsupportedOperationException();
             }
         }
-        return antall;
-
-
+        return antallUlikverdier;
     }
 
 

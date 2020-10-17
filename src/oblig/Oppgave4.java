@@ -25,7 +25,6 @@ public class Oppgave4 {
         int pos = partisjonering(a, a[h], v, h-1);
         bytt(a, pos, h);
         return pos;
-
     }
     public static int partisjonering(int[] a, int pivot, int v, int h){
         while (true) {

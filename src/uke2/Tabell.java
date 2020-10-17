@@ -1,5 +1,7 @@
 package uke2;
 
+import uke4.eksempelklasser.Komparator;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -9,6 +11,7 @@ public class Tabell {
     public static void bytt(int[]a, int i, int j){
         int temp=a[i]; a[i]=a[j]; a[j]=temp;
     }
+
 
     //1.1.8 e
     public static int[] randPerm(int n)  // en effektiv versjon
@@ -117,4 +120,59 @@ public class Tabell {
         return verdi == a[i] ? i : -(i + 1);   // sjekker innholdet i a[i]
     }
 
+    // 1.4.1 a
+    public static int maks(double[] a)     // legges i class Tabell
+    {
+        int m = 0;                           // indeks til største verdi
+        double maksverdi = a[0];             // største verdi
+
+        for (int i = 1; i < a.length; i++) if (a[i] > maksverdi)
+        {
+            maksverdi = a[i];     // største verdi oppdateres
+            m = i;                // indeks til største verdi oppdaters
+        }
+        return m;     // returnerer posisjonen til største verdi
+    }
+
+    // 1.4.1 b
+    public static int maks(String[] a)    // legges i class Tabell
+    {
+        int m = 0;                          // indeks til største verdi
+        String maksverdi = a[0];            // største verdi
+
+        for (int i = 1; i < a.length; i++) if (a[i].compareTo(maksverdi) > 0)
+        {
+            maksverdi = a[i];  // største verdi oppdateres
+            m = i;             // indeks til største verdi oppdaters
+        }
+        return m;  // returnerer posisjonen til største verdi
+    }
+
+    //Programkode 1.4.2 e)
+    public static <T extends Comparable<? super T>> void innsettingssortering(T[] a)
+    {
+        for (int i = 1; i < a.length; i++)  // starter med i = 1
+        {
+            T verdi = a[i];        // verdi er et tabellelemnet
+            int  j = i - 1;        // j er en indeks
+            // sammenligner og forskyver:
+            for (; j >= 0 && verdi.compareTo(a[j]) < 0 ; j--) a[j+1] = a[j];
+
+            a[j + 1] = verdi;      // j + 1 er rett sortert plass
+        }
+    }
+    // Programkode 1.4.6 b)
+    public static <T> void innsettingssortering(T[] a, Komparator<? super T> c)
+    {
+        for (int i = 1; i < a.length; i++)  // starter med i = 1
+        {
+            T verdi = a[i];        // verdi er et tabellelemnet
+            int  j = i - 1;        // j er en indeks
+
+            // sammenligner og forskyver:
+            for (; j >= 0 && c.compare(verdi,a[j]) < 0 ; j--) a[j+1] = a[j];
+
+            a[j + 1] = verdi;      // j + 1 er rett sortert plass
+        }
+    }
 }

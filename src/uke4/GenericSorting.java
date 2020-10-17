@@ -66,6 +66,7 @@ public class GenericSorting {
         return current_indeks;
     }
 
+
     public static void main(String [] args) {
         Integer[] a = {1, 2, 9, 18, 98, 5, 6, 9};
         Character[] b = {'A', 'C', 'K', 'L', 'Z', 'Y', 'M'};
