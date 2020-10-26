@@ -21,7 +21,35 @@ public class BinaryTree {
             this.rightChild=new BinaryTreeNode(value);
             return this.rightChild;
         }
+
     }
+    static void printPreOrder(BinaryTreeNode node){
+        if (node==null){
+            return;
+        }
+        System.out.print(node.value+" ");
+        printPreOrder(node.leftChild);
+        printPreOrder(node.rightChild);
+    }
+    static void printInOrder(BinaryTreeNode node){
+        if (node==null){
+            return;
+        }
+        printInOrder(node.leftChild);
+        System.out.print(node.value+" ");
+        printInOrder(node.rightChild);
+    }
+    static void printPostOrder(BinaryTreeNode node){
+        if (node==null){
+            return;
+        }
+        printPostOrder(node.leftChild);
+        printPostOrder(node.rightChild);
+        System.out.print(node.value + " ");
+
+
+    }
+
     static void printLevelOrder(BinaryTreeNode root){
         ArrayDeque<BinaryTreeNode> queue= new ArrayDeque<BinaryTreeNode>();
        // legger til rot
@@ -41,6 +69,36 @@ public class BinaryTree {
             System.out.print(current.value+" ");
         }
     }
+    static BinaryTreeNode printPost(BinaryTreeNode p){
+        if (p==null){
+            return null;
+        }
+        while (true){
+            if (p.rightChild !=null) p= p.rightChild;
+            else if (p.leftChild !=null) p=p.leftChild;
+            else return p;
+        }
+
+    }
+    static void printPreOrderNonRecursive(BinaryTreeNode root)  {
+        ArrayDeque<BinaryTreeNode> stack=new ArrayDeque<BinaryTreeNode>();
+        stack.addLast(root);
+
+        while (!stack.isEmpty()){
+            BinaryTreeNode current =stack.removeLast();
+            if (current.rightChild!=null) {
+                stack.addLast(current.rightChild);
+            }
+            if (current.leftChild !=null) {
+                stack.addLast(current.leftChild);
+            }
+            System.out.print(current.value+" ");
+        }
+
+
+
+    }
+
     public static void main(String []args){
         // Legger rot noden
         BinaryTreeNode root=new BinaryTreeNode('A');
@@ -56,7 +114,21 @@ public class BinaryTree {
         BinaryTreeNode f=c.addLeftChild('F');
         BinaryTreeNode g=c.addRightChild('G');
 
-        printLevelOrder(root);
+         //Kall på funksjonen
+        //printLevelOrder(root);
+        System.out.println("Pre-order: ");
+        printPreOrder(root);
+        System.out.println();
+        
+        System.out.println("In-order: ");
+        printInOrder(root);
+        System.out.println();
+        System.out.println("Post order: ");
+        printPostOrder(root);
+        System.out.println();
+
+        System.out.println("Pre-order non-recursive:");
+        printPreOrderNonRecursive(root);
 
     }
 }
