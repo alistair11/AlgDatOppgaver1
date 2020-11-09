@@ -1,10 +1,14 @@
 package uke11;
 
+import mosh.Array;
+
 import java.util.Arrays;
 
 public class HeapSort {
     public static void main(String [] args){
         int values[] ={-99,5,9,8,3,1};  // bruker ikke indeks 0
+
+        heapsort(values);
 
 
     }
@@ -16,7 +20,49 @@ public class HeapSort {
         for (int i=1; i<values.length; i++){
             int first=1;
             int last=values.length-i;
+
+            System.out.println("Bytter "+first+ " med "+last);
+
+            int tmp=values[first];
+            values[first]=values[last];
+            values[last]=tmp;
+
+            int current=first;
+            int leftChild=current*2;
+            int rightChild=current*2+1;
+            while (true){
+                // Venstre barn er minst av barna, og mindre enn parent
+                if (leftChild < last
+                        && values[leftChild] < values[rightChild]
+                        && values[leftChild] < values[current]){
+                    System.out.println("Bytter "+current+" med "+leftChild);
+                    int tmp2=values[leftChild];
+                    values[leftChild]=values[current];
+                    values[current]=tmp2;
+                    // flytter til venstre
+                    current=leftChild;
+                }
+                //Høyre barn er minst av barna, og mindre enn parent
+               else if (rightChild <last
+                       &&values[rightChild] < values[rightChild]
+                        && values[rightChild] <values[current]){
+                   System.out.println("Bytter "+current+" med "+rightChild);
+                    int tmp2=values[rightChild];
+                    values[rightChild] =values[current];
+                    values[current]=tmp2;
+                    //flytter til høyre
+                    current=rightChild;
+
+                }
+               // Vi har funnet riktig plass til elementet
+               else {
+                   break;
+                }
+               leftChild=current*2;
+               rightChild=current*2+1;
+            }
         }
+        System.out.println("Array etter uttak "+ Arrays.toString(values));
 
     }
     static void heapify(int [] values){
