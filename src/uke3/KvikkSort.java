@@ -1,5 +1,6 @@
 package uke3;
 
+import sorting.QuickSort;
 import uke2.Tabell;
 
 import java.util.Arrays;
@@ -41,5 +42,6 @@ public class KvikkSort {
         System.out.println(Arrays.toString(a));
         kvikksortering(a);
         System.out.println(Arrays.toString(a));
+
     }
 }

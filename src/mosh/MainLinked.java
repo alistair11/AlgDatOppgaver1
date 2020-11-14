@@ -1,9 +1,7 @@
 package mosh;
 
-import java.util.Arrays;
-
 public class MainLinked {
-    public static void main(String [] args){
+    public static <H> void main(String [] args){
         /*
         LinkedList list=new LinkedList();
         list.addFirst(10);
@@ -19,12 +17,14 @@ public class MainLinked {
         System.out.println(Arrays.toString(array));
 
          */
-
-        LinkedList list=new LinkedList();
+        LinkedList<H> list=new LinkedList<H>();
         list.addLast(10);
         list.addLast(20);
         list.addLast(30);
         list.removeLast();
         System.out.println(list.contains(10));
     }
+
+
 }
+

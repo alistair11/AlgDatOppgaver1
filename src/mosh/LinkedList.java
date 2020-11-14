@@ -2,7 +2,7 @@ package mosh;
 
 import java.util.NoSuchElementException;
 
-public class LinkedList {
+public class LinkedList<H> {
     private class Node{
         private int value;
         private Node next;
