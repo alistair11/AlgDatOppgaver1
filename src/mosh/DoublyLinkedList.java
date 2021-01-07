@@ -48,8 +48,37 @@ public class DoublyLinkedList {
         System.out.println("null");
     }
 
+    // legger inn i starten
+    public void insertFirst(int value){
+        listNode nyNode=new listNode(value);
+        if (isEmpty()){
+            tail=nyNode;
+        }else {
+            head.previous=nyNode;
+        }
+        nyNode.next=head;
+        head=nyNode;
+        length++;
+    }
+    public void insertLast(int value){
+        listNode nyNode=new listNode(value);
+
+        if (isEmpty()){
+            head=nyNode;
+        }
+        else {
+            tail.next=nyNode;
+            nyNode.previous=tail;
+        }
+        tail=nyNode;
+        length++;
+    }
     public static void main (String [] args){
         DoublyLinkedList dll=new DoublyLinkedList();
-        dll.
+
+        dll.insertFirst(2);
+        dll.insertFirst(10);
+        dll.insertLast(3);
+        dll.displayforward();
     }
 }
